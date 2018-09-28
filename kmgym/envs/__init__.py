@@ -1,1 +1,1 @@
-from debug import Debug
+from kmgym.envs.debug import Debug
