@@ -12,6 +12,8 @@ def dec2binarray(d, bits=8):
 class Debug(gym.Env):
 
     def __init__(self):
+        """Init should set up the environment, the observation and action spaces.
+           It cannot take any arguments (only self)"""
         self.nbits = 5
         self.observation_space = spaces.Discrete(self.nbits)
         self.action_space = spaces.Discrete(2)
@@ -26,12 +28,21 @@ class Debug(gym.Env):
 
 
     def reset(self):
+        """Reset should reset the environment, and return the new state"""
         self._current_state_dec_internal = np.random.randint(0,self.nbits)
         self._nsteps = 0
         return self.current_state
 
 
     def step(self, action):
+        """Step should take an action (integer or array of integers in discrete case,
+           float (or array of floats) in continuous case.  It should return a tuple
+             (s_t+1, reward, done_flag, information)
+           s_t+1 : next state
+           reward: float
+           done_flag: boolean
+           information: some other information that you want passed around.  I've never seen this used by anything
+        """
         self._nsteps += 1
         if action==0:
             self._current_state_dec_internal -= 1
